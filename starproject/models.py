@@ -29,7 +29,7 @@ class Profile(models.Model):
     def filter_by_id(cls, id):
         profile = Profile.objects.filter(user = id).first()
         return profile
-        
+
     @classmethod
     def update_profile(cls, id, profile_picture,bio):
         cls.objects.filter(id=id).update(profile_picture=profile_picture,bio=bio)    
@@ -42,7 +42,16 @@ class Project(models.Model):
     link = models.URLField(blank=True)
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
 
+    def save_project(self):
+        self.save()
+
+    def delete_project(self):
+        self.delete()
+
+        
    # 3. Reviews/rating.
 class Review(models.Model):
     ratings= (
