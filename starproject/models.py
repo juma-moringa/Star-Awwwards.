@@ -4,13 +4,31 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile",primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name="profile")
     profile_picture = CloudinaryField('image')
     bio= models.TextField()
     contact = models.CharField(max_length=60,blank=True)
     
+    #profile  class methods
+    def __str__(self):
+        return self.user.username
 
+    def save_profile(self):
+        self.save()
 
+    def delete_profile(self):
+        self.delete()
+
+    @classmethod
+    def get_profile_by_id(cls, id):
+        profile = Profile.objects.get(user = id)
+        return profile
+
+    @classmethod
+    def filter_by_id(cls, id):
+        profile = Profile.objects.filter(user = id).first()
+        return profile
+    
 
 class Project(models.Model):
     title = models.CharField(max_length=60,blank=True)
