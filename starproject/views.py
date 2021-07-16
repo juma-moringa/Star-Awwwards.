@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/accounts/login/')
 def index(request):
     return render( request,'index.html')
+@login_required(login_url='/accounts/login/')
+def awwwards_profile(request):
+    return render( request,'index.html')
 
 def register(request):
     if request.method=="POST":
