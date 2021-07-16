@@ -51,7 +51,7 @@ class Project(models.Model):
     def delete_project(self):
         self.delete()
 
-        
+
    # 3. Reviews/rating.
 class Review(models.Model):
     ratings= (
@@ -68,3 +68,11 @@ class Review(models.Model):
     project = models.ForeignKey(Project,null=True,on_delete=models.CASCADE)
     average =  models.DecimalField(default=1,blank=False,max_digits=30,decimal_places=2)
    
+    def __str__(self):
+        return self.user
+
+    def save_review(self):
+        self.save()
+
+    def delete_review(self):
+        self.delete()
