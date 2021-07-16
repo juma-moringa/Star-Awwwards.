@@ -3,6 +3,7 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
 # Create your models here.
+   # 1. profile.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name="profile")
     profile_picture = CloudinaryField('image')
@@ -28,8 +29,12 @@ class Profile(models.Model):
     def filter_by_id(cls, id):
         profile = Profile.objects.filter(user = id).first()
         return profile
+        
+    @classmethod
+    def update_profile(cls, id, profile_picture,bio):
+        cls.objects.filter(id=id).update(profile_picture=profile_picture,bio=bio)    
     
-
+   # 2. project.
 class Project(models.Model):
     title = models.CharField(max_length=60,blank=True)
     image = CloudinaryField('image')
@@ -38,8 +43,7 @@ class Project(models.Model):
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
 
-
-
+   # 3. Reviews/rating.
 class Review(models.Model):
     ratings= (
         (1, '1'),(2, '2'),
