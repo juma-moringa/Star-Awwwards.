@@ -12,7 +12,7 @@ def index(request):
     profiles = Profile.objects.all()
     projects = Project.objects.all()
     return render( request,'index.html',{"profiles":profiles,"projects":projects})
-    
+
 @login_required(login_url='/accounts/login/')
 def awwwards_profile(request):
     return render( request,'index.html')
@@ -31,8 +31,6 @@ def register(request):
         form= SignUpForm()
     return render(request, 'registration/registration_form.html', {"form":form})  
 
-
-
 @login_required(login_url='/accounts/login/')    
 def profile(request):
     if request.method == 'POST':
@@ -44,8 +42,6 @@ def profile(request):
         user_profile_form = ProfileForm(instance=request.user)
         # user_form = UserProfileUpdateForm(instance=request.user)
     return render(request, 'profile.html',{"user_profile_form": user_profile_form})
-
-
 
 @login_required(login_url='/accounts/login')
 def awwards_project(request):
