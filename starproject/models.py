@@ -36,6 +36,7 @@ class Profile(models.Model):
     
    # 2. project.
 class Project(models.Model):
+    user = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=60,blank=True)
     image = CloudinaryField('image')
     description = models.TextField()
