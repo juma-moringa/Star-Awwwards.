@@ -1,5 +1,5 @@
 
-from starproject.models import Profile
+from starproject.models import Profile, Project
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -23,3 +23,10 @@ class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username','email']
+
+# new project form
+class ProjectsForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        exclude = ['profile','user']
+

@@ -1,6 +1,6 @@
 from starproject.models import Profile, Project
 from django.contrib.auth.models import User
-from starproject.forms import ProfileForm, SignUpForm
+from starproject.forms import ProfileForm, ProjectsForm, SignUpForm
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -40,3 +40,6 @@ def profile(request):
         user_profile_form = ProfileForm(instance=request.user)
         # user_form = UserProfileUpdateForm(instance=request.user)
     return render(request, 'profile.html',{"user_profile_form": user_profile_form})
+
+
+
