@@ -11,6 +11,20 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import django_heroku
+import dj_database_url
+from decouple import config,Csv
+
+cloudinary.config(
+  cloud_name = "cameraroll",
+  api_key = "866675233265549",
+  api_secret = "fusVvTZC5TfGZJT3OJ9uUytL7uU",
+  secure = True
+)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

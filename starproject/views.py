@@ -7,8 +7,12 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
+
 def index(request):
-    return render( request,'index.html')
+    profiles = Profile.objects.all()
+    projects = Project.objects.all()
+    return render( request,'index.html',{"profiles":profiles,"projects":projects})
+    
 @login_required(login_url='/accounts/login/')
 def awwwards_profile(request):
     return render( request,'index.html')
