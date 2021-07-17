@@ -27,16 +27,7 @@ def register(request):
         form= SignUpForm()
     return render(request, 'registration/registration_form.html', {"form":form})  
 
-# @login_required(login_url='/accounts/login/')
-# def profile(request, username):
-#     title = "Profile"
-#     profile = User.objects.get(username=username)
-#     users = User.objects.get(username=username)
-#     id = request.user.id
-#     form = ProfileForm()
-#     profile_details = Profile.get_profile_by_id(profile.id)
-#     projects = Project.get_profile_picture(profile.id)
-#     return render(request, 'profile.html', {'title':title,'profile':profile,"projects":projects, 'profile_details':profile_details,"form":form})
+
 
 @login_required(login_url='/accounts/login/')    
 def profile(request):
