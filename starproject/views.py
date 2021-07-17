@@ -1,4 +1,6 @@
-from starproject.forms import SignUpForm
+from starproject.models import Profile, Project
+from django.contrib.auth.models import User
+from starproject.forms import ProfileForm, SignUpForm
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -23,4 +25,27 @@ def register(request):
         return redirect('login')
     else:
         form= SignUpForm()
-    return render(request, 'registration/registration_form.html', {"form":form})        
+    return render(request, 'registration/registration_form.html', {"form":form})  
+
+# @login_required(login_url='/accounts/login/')
+# def profile(request, username):
+#     title = "Profile"
+#     profile = User.objects.get(username=username)
+#     users = User.objects.get(username=username)
+#     id = request.user.id
+#     form = ProfileForm()
+#     profile_details = Profile.get_profile_by_id(profile.id)
+#     projects = Project.get_profile_picture(profile.id)
+#     return render(request, 'profile.html', {'title':title,'profile':profile,"projects":projects, 'profile_details':profile_details,"form":form})
+
+@login_required(login_url='/accounts/login/')    
+def profile(request):
+    if request.method == 'POST':
+        user_profile_form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        if  user_profile_form.is_valid():
+            user_profile_form.save()
+            return redirect('home')
+    else:
+        user_profile_form = ProfileForm(instance=request.user)
+        # user_form = UserProfileUpdateForm(instance=request.user)
+    return render(request, 'profile.html',{"user_profile_form": user_profile_form})
