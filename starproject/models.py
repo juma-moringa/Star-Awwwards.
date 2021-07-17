@@ -36,10 +36,10 @@ class Profile(models.Model):
     
    # 2. project.
 class Project(models.Model):
-    user = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=60,blank=True)
     image = CloudinaryField('image')
     description = models.TextField()
+    user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     link = models.URLField(blank=True)
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
@@ -62,7 +62,7 @@ class Review(models.Model):
         (7, '7'),(8, '8'),
         (9, '9'),(10, '10'),
     )
-    user = models.ForeignKey(User,null=True,blank=True)
+    user = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
     content = models.IntegerField(choices=ratings,blank=False,default=0)
     design = models.IntegerField(choices=ratings,default=0,blank=False)
     usability = models.IntegerField(choices=ratings,blank=False,default=0)

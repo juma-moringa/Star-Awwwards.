@@ -93,9 +93,10 @@ WSGI_APPLICATION = 'awwwards.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'starproject',   
+        'NAME': 'awards',   
         'USER': 'moringa',      
         'PASSWORD':'Access',
+        'HOST': 'localhost', 
     }
 }
 
