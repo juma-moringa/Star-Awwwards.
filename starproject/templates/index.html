@@ -2,6 +2,24 @@
 {% load static %}
 {% load bootstrap3 %}
 {% block content %}
+<style>
+    .button {
+      background-color: #ddd;
+      border: none;
+      color: black;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 16px;
+    }
+    
+    .button:hover {
+      background-color: #f1f1f1;
+    }
+    </style>
 <div style="margin-top:50px;">
     <div class="container">
         <div class="row">
@@ -9,22 +27,23 @@
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="card">
                     <div class="card-body">
+                        <div style="text-align:center;">{{project.title}}</div>
                         <a href="{% url 'projectdetails' id=project.id %}">
-                            <div>
-                                <img class="card-img-top mb-10 img-thumbnail" style="width:100%;height:260px;"
-                                    src="{{project.image.url}}" alt="image">
-                                <div class="overlay">
-                                    <div class="text">{{project.title}}</div>
-                                    <div class="img-thumbnail">
-                                        <a href="{% url 'projectdetails' id=project.id %}"
-                                        class="btn btn-success">Review</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+
+                            <img class="card-img-top mb-10 img-thumbnail" style="width:100%;height:260px;"
+                                src="{{project.image.url}}" alt="image">
+
+                    </div>
+                    </a>
+                    <div class="overlay">
+                        
+                        <p style="font-size:15px;">
+                            Posted by:{{project.user}}</p>
+                        <div class="">
+                            <a href="{% url 'projectdetails' id=project.id %}" class="button">Review</a>
+                        </div>
                         <br>
-                        <p style="font-size:20px;">
-                        Posted by:{{project.user}}</p>
+
                     </div>
                 </div>
             </div>
