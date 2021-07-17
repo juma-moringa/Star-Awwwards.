@@ -1,4 +1,4 @@
-from starproject.models import Profile, Project
+from starproject.models import Profile, Project, Review
 from django.contrib.auth.models import User
 from starproject.forms import ProfileForm, ProjectsForm, SignUpForm
 from django.shortcuts import render,redirect
@@ -56,3 +56,9 @@ def awwards_project(request):
 	else:
 			form = ProjectsForm()
 	return render(request, 'starprojects.html',{"form":form})
+
+@login_required(login_url='/accounts/login')
+def display_project(request,id):
+    project = Project.objects.get(id = id)
+    reviews = Review.objects.all()
+    return render(request, 'displayproject.html',{"reviews":reviews,"project":project})
