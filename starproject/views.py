@@ -43,3 +43,16 @@ def profile(request):
 
 
 
+@login_required(login_url='/accounts/login')
+def awwards_project(request):
+	current_user = request.user
+	if request.method == 'POST':
+		form = ProjectsForm(request.POST,request.FILES)
+		if form.is_valid():
+			awwards_project = form.save(commit=False)
+			awwards_project.user = current_user
+			awwards_project.save()
+			return redirect('index')
+	else:
+			form = ProjectsForm()
+	return render(request, 'starprojects.html',{"form":form})
