@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
 
 def index(request):
     profiles = Profile.objects.all()

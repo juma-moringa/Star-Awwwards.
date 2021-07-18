@@ -30,3 +30,7 @@ class ProjectsForm(forms.ModelForm):
         model = Project
         exclude = ['profile','user']
         
+class ReviewsForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        exclude = ['user','average','project']
