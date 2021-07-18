@@ -55,18 +55,18 @@ class Project(models.Model):
         self.delete()
         
     @classmethod
-    def review_project_by_id(cls,id):
+    def project_by_id(cls,id):
         project = Project.objects.filter(id =id)
         return project
 
    # 3. Reviews/rating.
 class Review(models.Model):
     ratings= (
-        (1, '1'),(2, '2'),
+        (1, 'very low'),(2, '2'),
         (3, '3'),(4, '4'),
-        (5, '5'),(6, '6'),
+        (5, 'Avarage'),(6, '6'),
         (7, '7'),(8, '8'),
-        (9, '9'),(10, '10'),
+        (9, '9'),(10, 'Exellent'),
     )
     user = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
     content = models.IntegerField(choices=ratings,blank=False,default=0)

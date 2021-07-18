@@ -12,7 +12,8 @@ from django.core.urlresolvers import reverse
 def index(request):
     profiles = Profile.objects.all()
     projects = Project.objects.all()
-    return render( request,'index.html',{"profiles":profiles,"projects":projects})
+    reviews = Review.objects.all()
+    return render( request,'index.html',{"profiles":profiles,"projects":projects ,'reviews':reviews})
 
 @login_required(login_url='/accounts/login/')
 def awwwards_profile(request):
@@ -64,26 +65,26 @@ def display_project(request,id):
     reviews = Review.objects.all()
     return render(request, 'displayproject.html',{"reviews":reviews,"project":project})
 
-def rate_selected_project(request,project_id):
-    select_projct = Project.review_project_by_id(id=project_id)
+@login_required(login_url='/accounts/login/')
+def review_project(request,project_id):
+    rvw_proj = Project.project_by_id(id=project_id)
     project = get_object_or_404(Project, pk=project_id)
     current_user = request.user
     if request.method == 'POST':
         form = ReviewsForm(request.POST)
         if form.is_valid():
-            usability = form.cleaned_data['usability']
-            design = form.cleaned_data['design']
             content = form.cleaned_data['content']
-            rate_selected = Review()
-            rate_selected.project = project
-            rate_selected.user = current_user
-            rate_selected.design = design
-            rate_selected.usability = usability
-            rate_selected.content = content
-            rate_selected.average = (rate_selected.design + rate_selected.usability + rate_selected.content)/3
-            rate_selected.save()
-            # return HttpResponseRedirect(reverse('projectdetails', args=(project.id,)))
-            return redirect('index')
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            review = Review()
+            review.project = project
+            review.user = current_user
+            review.design = design
+            review.usability = usability
+            review.content = content
+            review.average = (review.design + review.usability + review.content)/3
+            review.save()
+            return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
     else:
         form = ReviewsForm()
-    return render(request, 'reviews.html', {"project":select_projct,"user":current_user,"form":form})
+    return render(request, 'reviews.html', {"user":current_user,"project":rvw_proj,"form":form})

@@ -11,6 +11,6 @@ urlpatterns=[
     url('logout/',auth_views.LogoutView.as_view(),name='logout'),
     url('profile/',views.profile, name='profile'),
     url('project/',views.awwards_project,name='newstarproject'),
-    url(r'^project_details/(?P<id>\d+)', views.display_project, name='projectdetails'),
-    url(r'^review/(?P<project_id>\d+)', views.rate_selected_project, name='review'), 
+    url(r'^project_details/(?P<id>\d+)', views.display_project, name='prjctdtls'),
+    url(r'^review/(?P<project_id>\d+)', views.review_project, name='review'), 
 ]
