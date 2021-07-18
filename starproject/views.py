@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 from starproject.models import Profile, Project, Review
 from django.contrib.auth.models import User
-from starproject.forms import ProfileForm, ProjectsForm, SignUpForm
+from starproject.forms import ProfileForm, ProjectsForm, ReviewsForm, SignUpForm
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -64,6 +64,26 @@ def display_project(request,id):
     reviews = Review.objects.all()
     return render(request, 'displayproject.html',{"reviews":reviews,"project":project})
 
-
-
-
+def rate_selected_project(request,project_id):
+    select_projct = Project.review_project_by_id(id=project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            usability = form.cleaned_data['usability']
+            design = form.cleaned_data['design']
+            content = form.cleaned_data['content']
+            rate_selected = Review()
+            rate_selected.project = project
+            rate_selected.user = current_user
+            rate_selected.design = design
+            rate_selected.usability = usability
+            rate_selected.content = content
+            rate_selected.average = (rate_selected.design + rate_selected.usability + rate_selected.content)/3
+            rate_selected.save()
+            # return HttpResponseRedirect(reverse('projectdetails', args=(project.id,)))
+            return redirect('index')
+    else:
+        form = ReviewsForm()
+    return render(request, 'reviews.html', {"project":select_projct,"user":current_user,"form":form})
