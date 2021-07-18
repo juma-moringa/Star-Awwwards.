@@ -1,3 +1,4 @@
+from starproject.serializer import ProfileSerializer
 from django.http.response import HttpResponseRedirect
 from starproject.models import Profile, Project, Review
 from django.contrib.auth.models import User
@@ -5,7 +6,12 @@ from starproject.forms import ProfileForm, ProjectsForm, ReviewsForm, SignUpForm
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from rest_framework import serializers
+from .models import Profile,Project
+from django.contrib.auth.models import User
+from django.urls import reverse
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # Create your views here.
 
@@ -89,6 +95,7 @@ def review_project(request,project_id):
         form = ReviewsForm()
     return render(request, 'reviews.html', {"user":current_user,"project":rvw_proj,"form":form})
 
+@login_required(login_url='/accounts/login/')
 def project_search(request): 
     if 'search_title' in request.GET and request.GET['search_title']:
         p_title = request.GET.get("search_title")
@@ -100,3 +107,19 @@ def project_search(request):
     else:
         message = "Your search did not match any project titles onboard."
     return render(request, 'projectsearch.html', {'message': message})
+
+# class MerchList(APIView):
+#     def get(self, request, format=None):
+#         all_merch = MoringaMerch.objects.all()
+#         serializers = MerchSerializer(all_merch, many=True)
+#         return Response(serializers.data) 
+
+
+
+class ProfileList(APIView):
+   
+    def get(self, request, format=None):
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(profiles, many=True)
+        return Response(serializer.data)
+

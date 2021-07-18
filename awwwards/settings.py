@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'starproject.apps.StarprojectConfig',
     'cloudinary',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

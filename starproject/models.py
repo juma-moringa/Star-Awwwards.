@@ -1,3 +1,4 @@
+from typing import BinaryIO
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
@@ -85,3 +86,11 @@ class Review(models.Model):
 
     def delete_review(self):
         self.delete()
+
+class ProfileApi(models.Model):
+    username = models.CharField(max_length=40)
+    bio = models.TextField()
+    projects=models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    project= models.ForeignKey(Project,null=True,on_delete=models.CASCADE)
+    profile_picture= CloudinaryField('image')
+      
