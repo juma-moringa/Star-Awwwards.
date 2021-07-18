@@ -1,4 +1,4 @@
-from starproject.serializer import ProfileSerializer
+from starproject.serializer import ProfileSerializer, ProjectSerializer
 from django.http.response import HttpResponseRedirect
 from starproject.models import Profile, Project, Review
 from django.contrib.auth.models import User
@@ -123,3 +123,9 @@ class ProfileList(APIView):
         serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
 
+class ProjectList(APIView):
+   
+    def get(self, request, format=None):
+        projects = Project.objects.all()
+        serializer = ProjectSerializer(projects, many=True)
+        return Response(serializer.data)
