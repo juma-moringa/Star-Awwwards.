@@ -43,6 +43,8 @@ class Project(models.Model):
     link = models.URLField(blank=True)
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
+
+     #project  class methods
     def __str__(self):
         return self.title
 
@@ -51,7 +53,11 @@ class Project(models.Model):
 
     def delete_project(self):
         self.delete()
-
+        
+    @classmethod
+    def review_project_by_id(cls,id):
+        project = Project.objects.filter(id =id)
+        return project
 
    # 3. Reviews/rating.
 class Review(models.Model):

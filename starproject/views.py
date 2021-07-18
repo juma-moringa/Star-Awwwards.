@@ -1,9 +1,11 @@
+from django.http.response import HttpResponseRedirect
 from starproject.models import Profile, Project, Review
 from django.contrib.auth.models import User
 from starproject.forms import ProfileForm, ProjectsForm, SignUpForm
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -62,3 +64,7 @@ def display_project(request,id):
     project = Project.objects.get(id = id)
     reviews = Review.objects.all()
     return render(request, 'displayproject.html',{"reviews":reviews,"project":project})
+
+
+
+

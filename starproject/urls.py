@@ -12,6 +12,5 @@ urlpatterns=[
     url('profile/',views.profile, name='profile'),
     url('project/',views.awwards_project,name='newstarproject'),
     url(r'^project_details/(?P<id>\d+)', views.display_project, name='projectdetails'),
-
-  
+    
 ]
