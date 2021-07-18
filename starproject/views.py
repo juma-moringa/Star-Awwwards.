@@ -88,3 +88,15 @@ def review_project(request,project_id):
     else:
         form = ReviewsForm()
     return render(request, 'reviews.html', {"user":current_user,"project":rvw_proj,"form":form})
+
+def project_search(request): 
+    if 'search_title' in request.GET and request.GET['search_title']:
+        p_title = request.GET.get("search_title")
+        searchResults = Project.search_projects(p_title)
+        message = f'P_title'
+        results=searchResults
+        message = message
+        return render(request,'projectsearch.html', {'results':results,'message':message})
+    else:
+        message = "Your search did not match any project titles onboard."
+    return render(request, 'projectsearch.html', {'message': message})
