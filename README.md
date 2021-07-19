@@ -1,8 +1,8 @@
 # AWWWARDS
-### Star--Awwwards 
+### ***Star--Awwwards***
 
 ## Author
-Juma Allan.
+***Juma Allan.***
 
 ## Description
 Star--awwwards is a Django web application where  registerd users can post project(s) they have created and get it reviewed/rated by their peers.
@@ -20,7 +20,7 @@ Star--awwwards is a Django web application where  registerd users can post proje
 ### Clone the  project Repo
 Run the following command on the terminal:
 `git clone https://github.com/juma-moringa/Star-Awwwards..git`
-* cd Instagram
+* cd STAR-AWWWARDS
 
 ###  Install and activate virtual environment
 Activate virtual environment using python3.8 
@@ -36,7 +36,6 @@ Install  all dependancies that will make the app run/function
 ### Create the Database
 * psql
 * CREATE DATABASE STAR-AWWWARDS;
-
 
 ### Make Migrations
 * python3 manage.py makemigrations starproject(App name)
