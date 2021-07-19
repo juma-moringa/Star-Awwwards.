@@ -72,10 +72,10 @@ Install  all dependancies that will make the app run/function
 
 ### Live Link
 
-[View Live Site.](https://starawwards.herokuapp.com/)
+***[View Live Site.](https://starawwards.herokuapp.com/)***
 
 ### License
 
-Star--Awwwards is under the [MIT](LICENSE) license.
+Star--Awwwards is under the ***[MIT](LICENSE)*** license.
 
 @Jaycreations-2021.
