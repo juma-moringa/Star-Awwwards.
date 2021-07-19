@@ -1,9 +1,10 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile 
+from .models import Profile, Project 
 
 
 # Create your tests here.
+#1
 class ProfileTestClass(TestCase):
 
     # test 1 Set up Method
@@ -29,3 +30,27 @@ class ProfileTestClass(TestCase):
 
     def tearDown(self):
         Profile.objects.all().delete()
+
+#2
+class ProjectTestClass(TestCase):
+     # test 2 Set up Method
+    def setUp(self):
+        self.project = Project(image='testpicture.png',title ='Django',description="star-awwaaards",link="https://www.star-awwaards.co.ke")
+
+    def tearDown(self):
+        Project.objects.all().delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.project, Project))
+
+    def test_save_project(self):
+        self.project.save_project()
+        projects = Project.objects.all()
+        self.assertTrue(len(projects)>0)
+
+    def test_delete_project(self):
+        self.project.save_project()
+        projects = Project.objects.all()
+        self.project.delete_project()
+        projects = Project.objects.all()
+        self.assertTrue(len(projects)==0)        
