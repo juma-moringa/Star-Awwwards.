@@ -3,6 +3,13 @@
 {% load bootstrap3 %}
 {% block content %}
 <style>
+     #banner {
+    background-image: url('https://s3.envato.com/files/279754472/106_AwardsShowOpener.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+
+    }
     .button {
       background-color: #ddd;
       border: none;
@@ -19,15 +26,9 @@
     .button:hover {
       background-color: #f1f1f1;
     }
-    #banner {
-    background-image: url('https://s3.envato.com/files/279754472/106_AwardsShowOpener.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 70vh;
-
-}
+   
     </style>
-     <div id="banner">
+     <div id="banner" style="font-family: 'Kavivanar', cursive;">
         <div class="navdiv">
 
             <div class="nav">
@@ -36,7 +37,7 @@
 
             </div>
             <div class="card-text" style="margin-top:300px;margin-left:50px">
-                <a href="/" class="button">Visit site</a>
+                <a href="https://www.awwwards.com/" class="button">Visit site</a>
                 <a href="/" class="button">Collect</a>
                 <br>
             </div>
@@ -46,31 +47,32 @@
         </div>
 
     </div>
-    <div class="container">
+    <div class="container" style="font-family: 'Kavivanar', cursive;">
         <h2 class="text-center"><b>Star--Awwwards</b>
             </h2>
         <P><b>Sites of the day</b> Previous winners.</P>
 
     </div>
-<div style="margin-top:50px;">
+<div style="margin-top:50px;" style="font-family: 'Kavivanar', cursive;">
     <div class="container">
         <div class="row">
             {% for project in projects %}
-            <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="col-sm-12 col-md-4 col-lg-3"style="font-family: 'Kavivanar', cursive;">
                 <div class="card">
                     <div class="card-body">
-                        <div style="text-align:center;">{{project.title}}</div>
-                        <a href="{% url 'prjctdtls' id=project.id %}">
+                        <div style="text-align:center;"><b>{{project.title}}</b></div>
+                        <!-- <a href="/"> -->
 
                             <img class="card-img-top mb-10 img-thumbnail" style="width:100%;height:260px;"
                                 src="{{project.image.url}}" alt="image">
                     </div>
-                    </a>
+                    <!-- </a> -->
                     <div class="overlay">
                         <p style="font-size:15px;">
                             Posted by:{{project.user}}</p>
+                            <p>Top trending</p>
                         <div class="">
-                            <a href="{% url 'prjctdtls' id=project.id %}" class="button">Review</a>
+                            <a href="{% url 'prjctdtls' id=project.id %}" class="button"><b>Review</b></a>
                         </div>
                         <br>
 

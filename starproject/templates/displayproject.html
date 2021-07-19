@@ -1,14 +1,15 @@
 {%extends 'base.html'%}
 {% block content %}
-<div class="container" style="margin-left: 280px;">
+<div class="container" style="margin-left: 280px;font-family: 'Kavivanar', cursive;">
     <div class="row">
+        <h2 style=>Rates & Reviews</h2>
         <div class="">
             <div class="col-sm-12 col-md-5 col-lg-4">
                 <div class="card" style="height:100%;width:150%;">
                     <div class="card-body">
                         <a href="{% url 'prjctdtls' id=project.id %}">
                             <img class="img-thumbnail mb-10" src="{{project.image.url}}"
-                                style="height: 300px;width: 365px; margin-top:100px;">
+                                style="height: 300px;width: 365px; margin-top:30px;">
                         </a>
                     </div>
                 </div>
@@ -21,14 +22,16 @@
                 <div class="card-body">
                     <div class="card-text">
                         <a href="{% url 'review' project_id=project.id%}" class="btn btn-success">Rate</a>
-                        <a href="{{project.link}}" class="btn btn-success">Visit Site</a>
+                        <a href="{{project.link}}" class="btn btn-success">Live Site link</a>
                         <br>
                     </div>
                 </div>
             </div>
         </div>
         <br>
-        <div class="container" style="margin-top:80px">
+        <div class="container" style="margin-top:10px">
+            <h4>This project's Ratings </h4>
+            <hr style="color:black">
             <div class="col-md-6">
                 {% for review in reviews %}
                 <div class="row">
