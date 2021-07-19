@@ -12,6 +12,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .permissions import IsAdminOrReadOnly
+from rest_framework import status
 
 # Create your views here.
 
@@ -122,6 +124,14 @@ class ProfileList(APIView):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
+   
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        permission_classes = (IsAdminOrReadOnly,)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status= status.HTTP_201_CREATED)
+        return Response(serializers.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class ProjectList(APIView):
    
