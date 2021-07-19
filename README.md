@@ -48,16 +48,17 @@ Install  all dependancies that will make the app run/function
 ## Testing the application
 * python3 manage.py test starproject
 
-## Admin dashboard
+### Admin dashboard
 * The admin dashboard can be accessed from the dropdown menu just below the profile icon.
 * Firstly you must be on the homepage to access it.
 `Username: Admin`
 `Password: Access254`
- ## API Endpoints
+
+ ### API Endpoints
   - ***[Profiles Endpoint](https://starawwards.herokuapp.com/api/profileb)***
   - ***[Projects Endpoint](https://starawwards.herokuapp.com/api/projectsb)***
 
-## Technologies used
+### Technologies used
     - Python 3.8.10
     - HTML5
     - Django 3.2.5
@@ -66,14 +67,14 @@ Install  all dependancies that will make the app run/function
     - Postgresql
     - GIT
 
-## Enjoy :)
+### Enjoy :)
 
 
-## Live Link
+### Live Link
 
 [View Live Site.](https://starawwards.herokuapp.com/)
 
-## License
+### License
 
 Star--Awwwards is under the [MIT](LICENSE) license.
 
