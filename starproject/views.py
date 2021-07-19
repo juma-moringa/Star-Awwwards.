@@ -1,5 +1,5 @@
 from starproject.serializer import ProfileSerializer, ProjectSerializer
-from django.http.response import HttpResponseRedirect
+from django.http import HttpResponse, Http404,HttpResponseRedirect
 from starproject.models import Profile, Project, Review
 from django.contrib.auth.models import User
 from starproject.forms import ProfileForm, ProjectsForm, ReviewsForm, SignUpForm
@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .permissions import IsAdminOrReadOnly
 from rest_framework import status
+
 
 # Create your views here.
 
@@ -73,29 +74,6 @@ def display_project(request,id):
     reviews = Review.objects.all()
     return render(request, 'displayproject.html',{"reviews":reviews,"project":project})
 
-@login_required(login_url='/accounts/login/')
-def review_project(request,project_id):
-    rvw_proj = Project.project_by_id(id=project_id)
-    project = get_object_or_404(Project, pk=project_id)
-    current_user = request.user
-    if request.method == 'POST':
-        form = ReviewsForm(request.POST)
-        if form.is_valid():
-            content = form.cleaned_data['content']
-            design = form.cleaned_data['design']
-            usability = form.cleaned_data['usability']
-            review = Review()
-            review.project = project
-            review.user = current_user
-            review.design = design
-            review.usability = usability
-            review.content = content
-            review.average = (review.design + review.usability + review.content)/3
-            review.save()
-            return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
-    else:
-        form = ReviewsForm()
-    return render(request, 'reviews.html', {"user":current_user,"project":rvw_proj,"form":form})
 
 @login_required(login_url='/accounts/login/')
 def project_search(request): 
@@ -139,3 +117,53 @@ class ProjectList(APIView):
         projects = Project.objects.all()
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializers = ProjectSerializer(data=request.data)
+        permission_classes = (IsAdminOrReadOnly,)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+class ProjectDescription(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get_merch(self, pk):
+        try:
+            return Project.objects.get(pk=pk)
+        except Project.DoesNotExist:
+            return Http404
+
+    # def put(self,request, pk, format=None):
+    #     merch = self.get_project(pk)
+    #     serializers = MerchSerializer(Project, request.data)
+    #     if serializers.is_valid():
+    #         serializers.save()
+    #         return Response(serializers.data)
+    #     else:
+    #         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)        
+
+
+@login_required(login_url='/accounts/login/')
+def review_awward_project(request,project_id):
+    review_proj = Project.project_by_id(id=project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            rate = Review()
+            rate.project = project
+            rate.user = current_user
+            rate.usability = usability
+            rate.design = design
+            rate.content = content
+            rate.average = (rate.usability +rate.design + rate.content)/3
+            rate.save()
+            return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
+    else:
+        form = ReviewsForm()
+    return render(request, 'reviews.html', {"user":current_user,"project":review_proj,"form":form})    
