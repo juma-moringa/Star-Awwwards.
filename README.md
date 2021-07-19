@@ -35,7 +35,7 @@ Install  all dependancies that will make the app run/function
 
 ### Create the Database
 * psql
-* CREATE DATABASE STAR-AWWWARDS;
+* Create database awards;
 
 ### Make Migrations
 * python3 manage.py makemigrations starproject(App name)
@@ -56,7 +56,7 @@ Install  all dependancies that will make the app run/function
 
 ## Technologies used
     - Python 3.8.10
-    - HTML
+    - HTML5
     - Django 3.2.5
     - Bootstrap 3
     - Heroku
