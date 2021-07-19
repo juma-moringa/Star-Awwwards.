@@ -5,17 +5,17 @@
 ***Juma Allan.***
 
 ## Description
-Star--awwwards is a Django web application where  registerd users can post project(s) they have created and get it reviewed/rated by their peers.
+Star--awwwards is a Python-Django web application where registered users can post project(s) they have created and get it reviewed/rated by their peers(Users).
 
 
 ## Set Up and Installations
 
 ### Prerequisites
-1. Ubuntu Software
-2. Python3.8.10
-3. Postgres
-4. python virtual environment (virtual:venv).
-5. Text editor - preferably Visual Studio Code Editor.
+ - Ubuntu Software
+ - Python3.8.10
+ - Postgres
+ - python virtual environment (virtual:venv).
+ - Text editor - preferably Visual Studio Code Editor.
 
 ### Clone the  project Repo
 Run the following command on the terminal:
