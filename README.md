@@ -53,6 +53,9 @@ Install  all dependancies that will make the app run/function
 * Firstly you must be on the homepage to access it.
 `Username: Admin`
 `Password: Access254`
+ ## API Endpoints
+  -[Profiles Endpoint](https://starawwards.herokuapp.com/api/profileb)
+  -[Projects Endpoint](https://starawwards.herokuapp.com/api/projectsb)
 
 ## Technologies used
     - Python 3.8.10
@@ -68,7 +71,7 @@ Install  all dependancies that will make the app run/function
 
 ## Live Link
 
-[View Live Site.]()
+[View Live Site.](https://starawwards.herokuapp.com/)
 
 ## License
 
