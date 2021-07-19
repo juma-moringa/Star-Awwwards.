@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile, Project 
+from .models import Profile, Project, Review 
 
 
 # Create your tests here.
@@ -11,7 +11,12 @@ class ProfileTestClass(TestCase):
     def setUp(self):
         self.user = User(username='juma.a')
         self.user.save()
-        self.profile = Profile(contact="0700112233",profile_picture='testpicture.png',bio='bwanamkunaji',user=self.user)
+        self.profile = Profile(
+            contact="0700112233",
+            profile_picture='testpicture.png',
+            bio='bwanamkunaji',
+            user=self.user
+            )
         self.profile.save_profile()
 
     def test_instance(self):
@@ -35,7 +40,12 @@ class ProfileTestClass(TestCase):
 class ProjectTestClass(TestCase):
      # test 2 Set up Method
     def setUp(self):
-        self.project = Project(image='testpicture.png',title ='Django',description="star-awwaaards",link="https://www.star-awwaards.co.ke")
+        self.project = Project(
+        image='testpicture.png',
+        title ='Django',
+        description="star-awwaaards",
+        link="https://www.star-awwwards.co.ke"
+        )
 
     def tearDown(self):
         Project.objects.all().delete()
@@ -53,4 +63,42 @@ class ProjectTestClass(TestCase):
         projects = Project.objects.all()
         self.project.delete_project()
         projects = Project.objects.all()
-        self.assertTrue(len(projects)==0)        
+        self.assertTrue(len(projects)==0)   
+
+
+
+class ReviewTestClass(TestCase):
+    def setUp(self):
+        self.user = User(username='juma.a')
+        self.user.save()
+        self.project = Project(
+            title ='Django', 
+            image='testpicture.png',
+            description="awwaaards",
+            link="https://www.star-awwwards.co.ke"
+            )
+        self.project.save_project()
+        self.new_review=Review(
+            design="10",
+            usability="10",
+            content="10",
+            user=self.user,
+            project=self.project
+            )
+        self.new_review.save_review()
+
+    def tearDown(self):
+        Review.objects.all().delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_review,Review))
+
+    def test_save_review(self):
+        reviews = Review.objects.all()
+        self.assertTrue(len(reviews)>0)
+
+    def test_delete_review(self):
+        self.new_review.save_review()
+        self.new_review.delete_review()
+        reviews = Review.objects.all()
+        self.assertTrue(len(reviews)==0)             
