@@ -94,8 +94,6 @@ def project_search(request):
 #         serializers = MerchSerializer(all_merch, many=True)
 #         return Response(serializers.data) 
 
-
-
 class ProfileList(APIView):
    
     def get(self, request, format=None):
@@ -146,7 +144,7 @@ class ProjectDescription(APIView):
 
 @login_required(login_url='/accounts/login/')
 def review_awward_project(request,project_id):
-    review_proj = Project.project_by_id(id=project_id)
+    review_projct = Project.project_by_id(id=project_id)
     project = get_object_or_404(Project, pk=project_id)
     current_user = request.user
     if request.method == 'POST':
@@ -166,4 +164,4 @@ def review_awward_project(request,project_id):
             return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
     else:
         form = ReviewsForm()
-    return render(request, 'reviews.html', {"user":current_user,"project":review_proj,"form":form})    
+    return render(request, 'reviews.html', {"user":current_user,"project":review_projct,"form":form})    
