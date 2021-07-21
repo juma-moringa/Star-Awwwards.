@@ -161,6 +161,8 @@ def review_awward_project(request,project_id):
             rate.content = content
             rate.average = (rate.usability +rate.design + rate.content)/3
             rate.save()
+            rate_avarage= (rate.average)/3
+            rate_avarage.save()
             return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
     else:
         form = ReviewsForm()
