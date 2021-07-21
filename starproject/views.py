@@ -154,6 +154,7 @@ def review_awward_project(request,project_id):
             design = form.cleaned_data['design']
             usability = form.cleaned_data['usability']
             rate = Review()
+            # rate_avarage=(rate.usability +rate.design + rate.content)/3
             rate.project = project
             rate.user = current_user
             rate.usability = usability
@@ -161,8 +162,8 @@ def review_awward_project(request,project_id):
             rate.content = content
             rate.average = (rate.usability +rate.design + rate.content)/3
             rate.save()
-            rate_avarage= (rate.average)/3
-            rate_avarage.save()
+            # rate_avarage= (rate.average)/3
+            # rate_avarage.save()
             return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
     else:
         form = ReviewsForm()
