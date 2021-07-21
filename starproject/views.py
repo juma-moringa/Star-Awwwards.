@@ -164,4 +164,4 @@ def review_awward_project(request,project_id):
             return HttpResponseRedirect(reverse('prjctdtls', args=(project.id,)))
     else:
         form = ReviewsForm()
-    return render(request, 'reviews.html', {"user":current_user,"project":review_projct,"form":form})    
+    return render(request, 'reviews.html', {"form":form,"user":current_user,"project":review_projct})    

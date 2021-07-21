@@ -11,11 +11,11 @@ Star--awwwards is a Python-Django web application where registered users can pos
 ## Set Up and Installations
 
 ### Prerequisites
- - Ubuntu Software
- - Python3.8.10
- - Postgres
- - python virtual environment (virtual:venv).
- - Text editor - preferably Visual Studio Code Editor.
+    - Ubuntu Software
+    - Python3.8.10
+    - Postgres
+    - python virtual environment (virtual:venv).
+    - Text editor - preferably Visual Studio Code Editor.
 
 ### Clone the  project Repo
 Run the following command on the terminal:
@@ -35,7 +35,7 @@ Install  all dependancies that will make the app run/function
 
 ### Create the Database
 * psql
-* Create database awards;
+* create database awards;
 
 ### Make Migrations
 * python3 manage.py makemigrations starproject(App name)
